@@ -24,13 +24,13 @@ tags:
 
 顶点与邻域的依赖关系可以用带参数的函数 fw 描述，我们称之为局部转移函数。基于顶点状态进行决策可以由带参数的函数 gw 表示，我们称它为局部输出函数。
 
-![local-transition-output-function.png](../resources/GNN/local-transition-output-function.png)
+![local-transition-output-function.png](/img/in-post/GNN/local-transition-output-function.png)
 
 这里 l 表示标签，co[n] 表示连接顶点 n 的边的集合，ne[n] 表示顶点 n 的邻接顶点，Xne[n] 与 lne[n] 分别表示由邻接顶点的状态向量和标签堆叠起来的向量。
 
 当处理位置无关图时，局部转移函数可以简化为
 
-![local-transition-non-positional-form.png](../resources/GNN/local-transition-non-positional-form.png)
+![local-transition-non-positional-form.png](/img/in-post/GNN/local-transition-non-positional-form.png)
 
 在这种形式的转移函数下，邻接顶点的顺序不影响顶点 n 的状态。
 
@@ -46,7 +46,7 @@ tags:
 
 状态向量可以由迭代算法求解
 
-![iterative-scheme.png](../resources/GNN/iterative-scheme.png)
+![iterative-scheme.png](/img/in-post/GNN/iterative-scheme.png)
 
 Banach’s Fixed Point theorem 表明只要 Fw 是个收缩映射，那么对于任何初始状态 x(0) 状态向量 x(t) 都能以指数速度收敛。
 

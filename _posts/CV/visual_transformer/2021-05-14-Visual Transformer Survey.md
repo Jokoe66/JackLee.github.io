@@ -26,7 +26,7 @@ transformer 是一种基于 self-attention 的序列转换模型，具有很强�
 
 transformer 整体上是一种 encoder - decoder 结构。encoder 输出是与输入序列长度相同的融合了上下文信息的序列，decoder 每一步预测一个位置的输出从而得到一个输出序列。decoder 是自回归的，每次预测都会以之前的预测作为额外的输入。
 
-![transformer_arch.png](../../resources/CV/visual_transformer/transformer_arch.png)
+![transformer_arch.png](/img/in-post/CV/visual_transformer/transformer_arch.png)
 
 encoder 由多个相同的网络层堆叠而成，每个网络层有两个子层，分别是多头注意力层和前馈网络层。这两个子层都使用了残差连接和 layer normalization。
 
@@ -36,7 +36,7 @@ decoder 同样由多个相同的网络层堆叠而成，不同于 encoder 的是
 
 多头注意力由多个相同、并行的注意力机制组成。注意力机制是对输入序列进行加权平均的操作，而权重是与输入序列有关的注意力。输入序列首先通过线性变换映射到 query, key 和 value 三个维度相同的空间中，注意力权重由 query 和 key 的归一化内积得到，输出由注意力加权的平均 value。
 
-![multi-head-attention.png](../../resources/CV/visual_transformer/multi-head-attention.png)
+![multi-head-attention.png](/img/in-post/CV/visual_transformer/multi-head-attention.png)
 
 **Position Encoding**
 
@@ -44,19 +44,19 @@ decoder 同样由多个相同的网络层堆叠而成，不同于 encoder 的是
 
 另一种方案是使用绝对位置的二进制编码。
 
-![position-encoding-binary.png](../../resources/CV/visual_transformer/position-encoding-binary.png)
+![position-encoding-binary.png](/img/in-post/CV/visual_transformer/position-encoding-binary.png)
 
 transformer 使用了不同频率的正余弦函数的组合来做位置编码。使用正余弦函数的直觉与使用二进制数字类似，二进制数字的不同比特位对应了不同频率的正余弦函数。因此这种编码方式是可以表示位置信息的。
 
 位置 t 的位置编码 pt 的维度为 d，
 
-![position-encoding-eq1.png](../../resources/CV/visual_transformer/position-encoding-eq1.png)
+![position-encoding-eq1.png](/img/in-post/CV/visual_transformer/position-encoding-eq1.png)
 
 每个位置编码由若干个不同频率的正余弦函数值对构成，频率随着维度的增加而逐渐降低。
 
-![position-encoding-eq2.png](../../resources/CV/visual_transformer/position-encoding-eq2.png)
+![position-encoding-eq2.png](/img/in-post/CV/visual_transformer/position-encoding-eq2.png)
 
-![position-encoding-eq3.png](../../resources/CV/visual_transformer/position-encoding-eq3.png)
+![position-encoding-eq3.png](/img/in-post/CV/visual_transformer/position-encoding-eq3.png)
 
 使用正余弦函数做位置编码的另一个好处是容易使模型利用到相对位置的信息。对于任意固定距离的两个位置，它们的位置编码是线性的关系，它们的相对位置编码可以通过位置编码简单的线性组合来得到。
 
@@ -96,13 +96,13 @@ transformer 使用了不同频率的正余弦函数的组合来做位置编码�
 
   空间卷积指的是卷积核尺寸大于 1 的卷积。作者使用了直接的策略，将卷积操作在每个空间位置的内积用多头 self-attention 替代。
 
-  ![local-attention.png](../../resources/CV/visual_transformer/local-attention.png)
+  ![local-attention.png](/img/in-post/CV/visual_transformer/local-attention.png)
 
   在每个空间位置，作者将通道分成 N 组，在每个组内做 self-attention，之后将 N 组 self-attention 的结果拼接起来，得到 multi-head self-attention 的结果。
 
   为了引入位置信息，作者使用相对位置 embedding 作为位置编码。相对位置指的是像素之间的位置偏移，包括行偏移和列偏移，二者的拼接作为最终的位置编码。行偏移和列偏移的 embedding 是可学习的。引入位置编码的 self-attention 如下所示。
 
-  ![../../resources/CV/visual_transformer/local-attention-with-pos-encoding.png](../../resources/CV/visual_transformer/local-attention-with-pos-encoding.png)
+  ![/img/in-post/CV/visual_transformer/local-attention-with-pos-encoding.png](/img/in-post/CV/visual_transformer/local-attention-with-pos-encoding.png)
 
   **2.2 Replacing the Convolutional Stem**
 
@@ -110,7 +110,7 @@ transformer 使用了不同频率的正余弦函数的组合来做位置编码�
 
   为了高效地获取对提取高层特征有用的边缘、局部特征，作者引入基于距离的卷积核参数化。基于这种卷积提取的特征做 self-attention 的效果可以大大提升。
 
-  ![attention-stem.png](../../resources/CV/visual_transformer/attention-stem.png)
+  ![attention-stem.png](/img/in-post/CV/visual_transformer/attention-stem.png)
 
 * **Local Relation Networks for Image Recognition**
 
@@ -148,15 +148,15 @@ transformer 使用了不同频率的正余弦函数的组合来做位置编码�
 
   为了提高 Tokenizer 的效率，作者引入了 recurrent Tokenizer。recurrent tokenizer 的结构与 filter-based tokenizer 大致一样，仅卷积核不同。它的卷积核是由上一个 VTs 提取的视觉符号经过线性变换得到的。这种基于内容的特征提取方式实际上与 self-attention 类似，上一个 VTs 提取的视觉符号经过线性变换得到 query，query 通过卷积的方式与作为 key 的特征图进行内积运算，得到 attention map，最后通过对作为 value 的特征图进行加权平均得到新的视觉符号。
 
-![recurrent-tokenizer.png](../../resources/CV/visual_transformer/recurrent-tokenizer.png)
+  ![recurrent-tokenizer.png](/img/in-post/CV/visual_transformer/recurrent-tokenizer.png)
 
-​	**2.2 Transformer**
+  **2.2 Transformer**
 
-​	在提取视觉符号之后，作者使用 Transformer对视觉符号之间的交互进行建模。Transformer 由标准的 self-attention 组成。
+  在提取视觉符号之后，作者使用 Transformer对视觉符号之间的交互进行建模。Transformer 由标准的 self-attention 组成。
 
-​	**2.3 Projector**
+  **2.3 Projector**
 
-​	与 tokenizer 类似的，视觉符号可以通过 projector 投影回特征图上。Projector 也是基于 attention 完成的。
+  与 tokenizer 类似的，视觉符号可以通过 projector 投影回特征图上。Projector 也是基于 attention 完成的。
 
 * **End-to-end object detection with transformers**
 
