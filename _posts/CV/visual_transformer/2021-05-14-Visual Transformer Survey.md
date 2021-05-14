@@ -9,14 +9,14 @@ tags:
   - attention machenism
 ---
 
-**1. 简介**
+## **1. 简介**
 
 transformer 在 nlp 领域获得了极大的成功，许多研究者开始探究它在 cv 领域的应用前景。本文总结了图像分类、检测等研究方向上的基于 transformer 的研究，旨在回答：
 
 1. transformer 相比于传统的基于卷积神经网络的视觉模型有什么样的优劣？
 2. transformer 是怎样应用于图像任务上的？
 
-**1.1 Transformer**
+### **1.1 Transformer**
 
 transformer 是一种基于 self-attention 的序列转换模型，具有很强的序列模式提取的能力。
 
@@ -62,11 +62,11 @@ transformer 使用了不同频率的正余弦函数的组合来做位置编码�
 
 这个性质有数学证明，而直观理解是把位置编码中的不同频率的正余弦函数对看成时钟上的速度不同指针（时针、分针），对于每个指针，从一个位置移动到另一个位置一定可以通过一个旋转线性变换来实现。
 
-**1.2 Visual Transformers**
+### **1.2 Visual Transformers**
 
-​		transformer 在视觉领域的研究可以分为辅助 CNN 和完全替代 CNN 两类。其中辅助 CNN 的方法在现阶段更为成熟、实际落地效果更好。辅助 CNN 的方法是将 self-attention 或 transformer 用于 CNN 提取的抽象特征上，用于增强抽象概念之间的远距离依赖关系的提取能力。完全替代 CNN 的方法将 self-attention 作为模型的基本组成部分，完成包括浅层图像处理、抽象特征提取的整个图像理解任务。
+transformer 在视觉领域的研究可以分为辅助 CNN 和完全替代 CNN 两类。其中辅助 CNN 的方法在现阶段更为成熟、实际落地效果更好。辅助 CNN 的方法是将 self-attention 或 transformer 用于 CNN 提取的抽象特征上，用于增强抽象概念之间的远距离依赖关系的提取能力。完全替代 CNN 的方法将 self-attention 作为模型的基本组成部分，完成包括浅层图像处理、抽象特征提取的整个图像理解任务。
 
-**1.2.1 Stand-alone Image Recognition with Self-Attention**
+#### **1.2.1 Stand-alone Image Recognition with Self-Attention**
 
 * **An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale**
 
@@ -118,7 +118,7 @@ transformer 使用了不同频率的正余弦函数的组合来做位置编码�
 
   这篇 paper 设计了基于 self-attention 的特征提取方法。在卷积特征提取中，空间聚合本质上是一个使用固定的卷积核来进行模式匹配的过程，这种方式在建模空间分布多变的视觉元素上效率低下。作者提出基于 self-attention 的特征提取网络 local relation layer 来增强空间聚合的能力。这种特征提取方法可以根据像素之间的关系来调整空间聚合时不同像素的权重，灵活地将不同像素组合成更高级的实体。作者用这种特征提取方法替代卷积的空间聚合，设计了完全基于 self-attention 的 LR - Net，其分类效果超过了基于卷积空间聚合的方法。
 
-**1.2.2 Combining Self-Attention with CNN**
+#### **1.2.2 Combining Self-Attention with CNN**
 
 * *** Visual Transformers: Token-based Image Representation and Processing for Computer Vision**
 
