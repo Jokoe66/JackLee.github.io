@@ -1,7 +1,8 @@
 # Site settings
 title: Jokoe66 Blog
 SEOTitle: 李俊杰的博客 | Jokoe66 Blog
-header-img: img/home-bg.jpg
+header-img: img/post-bg-2015.jpg
+#home-bg.jpg
 email: lijunjie@bupt.edu.cn
 description: "我会在这里记录一些ML相关的知识。"
 keyword: "Machine Learning, Deep Learning, Computor Vision."
